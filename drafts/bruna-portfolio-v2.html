@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bruna Chorincas — Photographer &amp; Videographer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3EFE7;
+    --paper-soft:#EBE5D9;
+    --ink:#2B2A26;
+    --fog:#6E6C63;
+    --rule: rgba(43,42,38,0.16);
+    --maxw: 1240px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Libre Caslon Text', serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  .eyebrow{
+    font-family:'Libre Caslon Text', serif;
+    font-style:italic;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:12px;
+    color:var(--fog);
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Libre Caslon Text', serif;
+    font-weight:400;
+    line-height:0.98;
+    margin:0;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px clamp(20px,4vw,56px);
+    background:linear-gradient(to bottom, rgba(243,239,231,0.9), rgba(243,239,231,0));
+    transition:background .3s ease, padding .3s ease;
+  }
+  header.scrolled{
+    background:rgba(243,239,231,0.95);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+    padding:14px clamp(20px,4vw,56px);
+  }
+  .logo{
+    font-size:16px;
+    letter-spacing:0.08em;
+    text-decoration:none;
+  }
+  nav ul{display:flex; gap:clamp(16px,3vw,36px); list-style:none; margin:0; padding:0;}
+  nav a{
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:0.02em;
+    color:var(--ink);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+  }
+  nav a:hover, nav a:focus-visible{border-bottom-color:var(--ink);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--ink);
+    font-family:'Libre Caslon Text',serif;font-size:14px;letter-spacing:.04em;padding:8px 0;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; height:100vh; min-height:560px; overflow:hidden;}
+  .hero-slide{
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+    opacity:0; transition:opacity 1.6s ease;
+  }
+  .hero-slide.active{opacity:1;}
+  .hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(24,22,18,0.55) 0%, rgba(24,22,18,0.05) 45%, rgba(24,22,18,0.2) 100%);
+  }
+  .hero-content{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:0 clamp(20px,4vw,56px) clamp(28px,5vw,56px);
+  }
+  .hero-title{
+    font-size:clamp(40px, 8vw, 104px);
+    max-width:16ch;
+    color:var(--paper);
+  }
+  .hero-tagline{
+    margin-top:18px;
+    font-size:clamp(12px,1.4vw,15px);
+    letter-spacing:0.04em;
+    color:var(--paper-soft);
+    font-style:italic;
+    display:flex; flex-wrap:wrap; gap:8px 16px;
+  }
+  .hero-tagline span:not(:last-child)::after{content:'·'; margin-left:16px; color:var(--paper-soft);}
+
+  .scroll-cue{
+    position:absolute; left:clamp(20px,4vw,56px); bottom:clamp(28px,5vw,56px); z-index:2;
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase; font-style:italic;
+    color:var(--paper-soft);
+    display:flex; align-items:center; gap:10px;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:clamp(60px,10vw,120px) clamp(20px,4vw,56px);}
+  .shell{max-width:var(--maxw); margin:0 auto;}
+  .section-head{
+    display:flex; justify-content:flex-end; align-items:flex-end; gap:24px;
+    margin-bottom:clamp(28px,4vw,48px);
+    border-bottom:1px solid var(--rule); padding-bottom:20px;
+  }
+
+  /* ---------- FILTER ---------- */
+  .filters{display:flex; flex-wrap:wrap; gap:22px;}
+  .filters button{
+    font-family:'Libre Caslon Text', serif; font-size:14px; letter-spacing:.02em;
+    background:none; border:none; color:var(--fog);
+    padding:4px 0; cursor:pointer; transition:.2s ease;
+    border-bottom:1px solid transparent;
+  }
+  .filters button:hover, .filters button:focus-visible{color:var(--ink);}
+  .filters button.active{color:var(--ink); border-bottom-color:var(--ink);}
+
+  /* ---------- CONTACT SHEET GALLERY ---------- */
+  .sprockets{display:flex; gap:6px; margin-bottom:14px;}
+  .sprockets span{width:9px; height:6px; background:var(--rule); border-radius:1px;}
+
+  .grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+    background:var(--rule);
+  }
+  @media (max-width:820px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .grid{grid-template-columns:1fr;} }
+
+  .frame{
+    position:relative; background:var(--paper); overflow:hidden;
+    aspect-ratio:4/5; cursor:default;
+    display:none;
+  }
+  .frame.show{display:block;}
+  .frame img{
+    width:100%; height:100%; object-fit:cover;
+    filter:grayscale(15%) contrast(1.02);
+    transition:transform .7s ease, filter .5s ease;
+  }
+  .frame:hover img{transform:scale(1.045); filter:grayscale(0%) contrast(1.02);}
+  .frame-tag{
+    position:absolute; top:12px; left:12px;
+    font-size:11px; letter-spacing:.06em; font-style:italic;
+    color:var(--paper); background:rgba(43,42,38,0.55); padding:4px 9px; border-radius:2px;
+  }
+  .frame-cap{
+    position:absolute; left:0; right:0; bottom:0; padding:14px;
+    background:linear-gradient(to top, rgba(24,22,18,0.72), rgba(24,22,18,0));
+    opacity:0; transform:translateY(6px); transition:.3s ease;
+  }
+  .frame:hover .frame-cap{opacity:1; transform:translateY(0);}
+  .frame-cap p{margin:0; font-size:13px; letter-spacing:.02em; color:var(--paper);}
+  .frame-cap span{color:var(--paper-soft); font-style:italic;}
+
+  /* ---------- ABOUT ---------- */
+  .about{display:grid; grid-template-columns:0.9fr 1.1fr; gap:clamp(30px,6vw,80px); align-items:center;}
+  @media (max-width:800px){ .about{grid-template-columns:1fr;} }
+  .about-photo{position:relative; aspect-ratio:4/5; overflow:hidden;}
+  .about-photo img{width:100%;height:100%;object-fit:cover; filter:grayscale(10%);}
+  .about p{font-size:clamp(16px,1.8vw,19px); line-height:1.75; color:var(--ink); max-width:52ch;}
+  .about .eyebrow{margin-bottom:14px; display:block;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--paper-soft); border-top:1px solid var(--rule);
+  }
+  .contact .shell{display:grid; grid-template-columns:1.3fr 1fr; gap:40px;}
+  @media (max-width:760px){ .contact .shell{grid-template-columns:1fr;} }
+  .contact h2{font-size:clamp(38px,7vw,80px);}
+  .contact-link{
+    display:inline-flex; align-items:center; gap:14px;
+    font-size:clamp(20px,3vw,28px);
+    text-decoration:none; margin-top:22px; color:var(--ink); border-bottom:1px solid var(--ink);
+    padding-bottom:6px;
+  }
+  .contact-link:hover{color:var(--fog); border-bottom-color:var(--fog);}
+  .contact-meta{font-size:14px; letter-spacing:.02em; color:var(--fog); line-height:2.1;}
+  .contact-meta a{text-decoration:none; border-bottom:1px solid var(--rule);}
+
+  footer{
+    padding:22px clamp(20px,4vw,56px); border-top:1px solid var(--rule);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:12px; letter-spacing:.02em; color:var(--fog); font-style:italic;
+  }
+
+  @media (max-width:700px){
+    nav{position:fixed; top:0; right:0; height:100vh; width:min(78vw,320px);
+      background:var(--paper); transform:translateX(100%); transition:transform .35s ease;
+      padding:90px 28px; border-left:1px solid var(--rule); z-index:99;}
+    nav.open{transform:translateX(0);}
+    nav ul{flex-direction:column; gap:22px;}
+    .nav-toggle{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <a href="#top" class="logo">Bruna Chorincas</a>
+  <nav id="siteNav">
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://www.instagram.com/brunachorincas/" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-slide active" style="background-image:url('https://static.wixstatic.com/media/0a180e_a31413a9d02842b3a13d7aeb0e2968db~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_59ee0cd9e11a4f86a43efcee6a839064~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_6c871521917849b49d77380ed62dab30~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_e8816916c48448759ec53d9c7958983b~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_6bc3c4af9f29473fb84b8507ebefc97e~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_f11e88ed8a404917a6f7ade153402266~mv2.jpg')"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-title">Bruna Chorincas</h1>
+    <div class="hero-tagline">
+      <span>Styling</span><span>Content Creation</span><span>Fashion Photography &amp; Film</span><span>Creative Direction</span>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</div>
+
+<section id="work">
+  <div class="shell">
+    <div class="section-head">
+      <div class="filters" id="filters">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="styling">Styling &amp; Art Direction</button>
+        <button data-filter="video">Videography</button>
+        <button data-filter="content">Content Creation</button>
+      </div>
+    </div>
+
+    <div class="sprockets">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="grid" id="galleryGrid">
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 01</span>
+        <img src="https://static.wixstatic.com/media/0a180e_a31413a9d02842b3a13d7aeb0e2968db~mv2.jpg" alt="Chin Up — styling project" loading="lazy">
+        <div class="frame-cap"><p>Chin Up <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 02</span>
+        <img src="https://static.wixstatic.com/media/0a180e_59ee0cd9e11a4f86a43efcee6a839064~mv2.jpg" alt="Reverse — styling project" loading="lazy">
+        <div class="frame-cap"><p>Reverse <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="content">
+        <span class="frame-tag">No. 03</span>
+        <img src="https://static.wixstatic.com/media/0a180e_6c871521917849b49d77380ed62dab30~mv2.jpg" alt="Content creation reel" loading="lazy">
+        <div class="frame-cap"><p>Social Content <span>— Content Creation</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 04</span>
+        <img src="https://static.wixstatic.com/media/0a180e_e8816916c48448759ec53d9c7958983b~mv2.jpg" alt="Alexandra Oakley — styling project" loading="lazy">
+        <div class="frame-cap"><p>Alexandra Oakley <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="video">
+        <span class="frame-tag">No. 05</span>
+        <img src="https://static.wixstatic.com/media/0a180e_6bc3c4af9f29473fb84b8507ebefc97e~mv2.jpg" alt="Videography still" loading="lazy">
+        <div class="frame-cap"><p>Brand Film <span>— Videography</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 06</span>
+        <img src="https://static.wixstatic.com/media/0a180e_f11e88ed8a404917a6f7ade153402266~mv2.jpg" alt="Elle Curzon — styling project" loading="lazy">
+        <div class="frame-cap"><p>Elle Curzon <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="content">
+        <span class="frame-tag">No. 07</span>
+        <img src="https://static.wixstatic.com/media/0a180e_5e8937f34f704ea59584350e053b2cc5~mv2.jpg" alt="Content creation still" loading="lazy">
+        <div class="frame-cap"><p>Now You Live <span>— Content Creation</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 08</span>
+        <img src="https://static.wixstatic.com/media/0a180e_87322a26a0f54f1db71c0c94d074c9ed~mv2.jpg" alt="Threads styling project" loading="lazy">
+        <div class="frame-cap"><p>Threads Styling <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="video">
+        <span class="frame-tag">No. 09</span>
+        <img src="https://static.wixstatic.com/media/0a180e_000dea68bf3941fbbd15de72d43742eb~mv2.jpg" alt="Narah Soleigh video still" loading="lazy">
+        <div class="frame-cap"><p>Narah Soleigh <span>— Videography</span></p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="shell about">
+    <div class="about-photo">
+      <img src="https://static.wixstatic.com/media/0a180e_6bc3c4af9f29473fb84b8507ebefc97e~mv2.jpg" alt="Bruna Chorincas portrait">
+    </div>
+    <div>
+      <span class="eyebrow">Who am I</span>
+      <h2 style="font-size:clamp(30px,5vw,48px); margin-bottom:18px;">Photographer &amp; videographer.</h2>
+      <p>I'm Bruna — a freelance photographer and videographer working with small, independent brands who want their social content to feel considered rather than churned out. I organise, style and shoot, from concept through to final edit, and I've spent the last few years learning exactly what makes a brand's feed feel like it belongs to them.</p>
+      <p>Previously a studio technician, I now work full-time on set and on location for fashion and lifestyle brands.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="shell">
+    <div>
+      <span class="eyebrow">Get in touch</span>
+      <h2>Let's<br>Shoot.</h2>
+      <a class="contact-link" href="mailto:bruna.chorincaspt@gmail.com">bruna.chorincaspt@gmail.com →</a>
+    </div>
+    <div class="contact-meta">
+      <p><a href="https://www.instagram.com/brunachorincas/" target="_blank" rel="noopener">Instagram — @brunachorincas</a></p>
+      <p><a href="mailto:bruna.chorincaspt@gmail.com">Email — bruna.chorincaspt@gmail.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Bruna Chorincas</span>
+  <span>Styling — Content Creation — Fashion Photography &amp; Film</span>
+</footer>
+
+<script>
+  // header shrink on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+  navToggle.addEventListener('click', () => {
+    const open = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    siteNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // hero carousel (no dots — auto-advance only)
+  const slides = document.querySelectorAll('.hero-slide');
+  let current = 0;
+  function goTo(i){
+    slides[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+  }
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion){
+    setInterval(() => goTo((current + 1) % slides.length), 5000);
+  }
+
+  // gallery filters
+  const filterButtons = document.querySelectorAll('.filters button');
+  const frames = document.querySelectorAll('.frame');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      frames.forEach(frame => {
+        const match = f === 'all' || frame.dataset.cat === f;
+        frame.classList.toggle('show', match);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

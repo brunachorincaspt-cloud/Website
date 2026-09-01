@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bruna Chorincas — Photographer &amp; Videographer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15120D;
+    --ink-soft:#1E1A14;
+    --bone:#EFE9DD;
+    --fog:#9C9border;
+    --fog2:#8B8577;
+    --safelight:#C1392B;
+    --safelight-dim:#7A241A;
+    --rule: rgba(239,233,221,0.14);
+    --maxw: 1240px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Spectral', serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:11px;
+    color:var(--safelight);
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.92;
+    margin:0;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px clamp(20px,4vw,56px);
+    background:linear-gradient(to bottom, rgba(21,18,13,0.85), rgba(21,18,13,0));
+    transition:background .3s ease, padding .3s ease;
+  }
+  header.scrolled{
+    background:rgba(21,18,13,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+    padding:12px clamp(20px,4vw,56px);
+  }
+  .logo{
+    font-family:'Space Mono', monospace;
+    font-size:14px;
+    letter-spacing:0.14em;
+    text-decoration:none;
+  }
+  .logo b{color:var(--safelight);}
+  nav ul{display:flex; gap:clamp(16px,3vw,36px); list-style:none; margin:0; padding:0;}
+  nav a{
+    text-decoration:none;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--bone);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+  }
+  nav a:hover, nav a:focus-visible{border-bottom-color:var(--safelight);}
+  .nav-toggle{display:none;background:none;border:1px solid var(--rule);color:var(--bone);
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;padding:8px 12px;border-radius:2px;}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; height:100vh; min-height:560px; overflow:hidden;}
+  .hero-slide{
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+    opacity:0; transition:opacity 1.6s ease;
+  }
+  .hero-slide.active{opacity:1;}
+  .hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(21,18,13,0.95) 0%, rgba(21,18,13,0.15) 45%, rgba(21,18,13,0.35) 100%);
+  }
+  .hero-content{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:0 clamp(20px,4vw,56px) clamp(28px,5vw,56px);
+  }
+  .hero-title{
+    font-size:clamp(40px, 8vw, 108px);
+    max-width:14ch;
+  }
+  .hero-tagline{
+    margin-top:18px;
+    font-family:'Space Mono', monospace;
+    font-size:clamp(11px,1.4vw,14px);
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--fog);
+    display:flex; flex-wrap:wrap; gap:10px 18px;
+  }
+  .hero-tagline span:not(:last-child)::after{content:'—'; margin-left:18px; color:var(--safelight-dim);}
+  .hero-dots{position:absolute; right:clamp(20px,4vw,56px); bottom:clamp(28px,5vw,56px); z-index:2;
+    display:flex; gap:8px;}
+  .hero-dots button{
+    width:8px;height:8px;border-radius:50%; border:1px solid var(--bone); background:transparent; padding:0; cursor:pointer;
+  }
+  .hero-dots button.active{background:var(--safelight); border-color:var(--safelight);}
+
+  .scroll-cue{
+    position:absolute; left:clamp(20px,4vw,56px); bottom:clamp(28px,5vw,56px); z-index:2;
+    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--fog); writing-mode:vertical-rl; text-orientation:mixed;
+    display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue::after{content:''; width:1px; height:36px; background:var(--fog2);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:clamp(60px,10vw,120px) clamp(20px,4vw,56px);}
+  .shell{max-width:var(--maxw); margin:0 auto;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    margin-bottom:clamp(28px,4vw,48px);
+    border-bottom:1px solid var(--rule); padding-bottom:20px;
+  }
+  .section-head h2{font-size:clamp(30px,5vw,56px);}
+
+  /* ---------- CLIENT STRIP ---------- */
+  .clients{
+    border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    padding:26px clamp(20px,4vw,56px);
+    display:flex; flex-wrap:wrap; align-items:center; gap:14px 36px;
+  }
+  .clients .eyebrow{margin-right:8px;}
+  .clients ul{display:flex; flex-wrap:wrap; gap:8px 32px; list-style:none; margin:0; padding:0;
+    font-family:'Space Mono',monospace; letter-spacing:.08em; font-size:13px; color:var(--fog);}
+
+  /* ---------- FILTER ---------- */
+  .filters{display:flex; flex-wrap:wrap; gap:10px;}
+  .filters button{
+    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    background:transparent; border:1px solid var(--rule); color:var(--fog);
+    padding:9px 16px; border-radius:2px; cursor:pointer; transition:.2s ease;
+  }
+  .filters button:hover, .filters button:focus-visible{border-color:var(--bone); color:var(--bone);}
+  .filters button.active{background:var(--safelight); border-color:var(--safelight); color:var(--bone);}
+
+  /* ---------- CONTACT SHEET GALLERY ---------- */
+  .sprockets{display:flex; gap:6px; margin-bottom:14px;}
+  .sprockets span{width:9px; height:6px; background:var(--rule); border-radius:1px;}
+
+  .grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+    background:var(--rule);
+  }
+  @media (max-width:820px){ .grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .grid{grid-template-columns:1fr;} }
+
+  .frame{
+    position:relative; background:var(--ink); overflow:hidden;
+    aspect-ratio:4/5; cursor:default;
+    display:none;
+  }
+  .frame.show{display:block;}
+  .frame img{
+    width:100%; height:100%; object-fit:cover;
+    filter:grayscale(45%) contrast(1.05);
+    transition:transform .7s ease, filter .5s ease;
+  }
+  .frame:hover img{transform:scale(1.045); filter:grayscale(0%) contrast(1.05);}
+  .frame-tag{
+    position:absolute; top:12px; left:12px;
+    font-family:'Space Mono', monospace; font-size:10px; letter-spacing:.1em;
+    color:var(--bone); background:rgba(21,18,13,0.55); padding:4px 8px; border-radius:2px;
+  }
+  .frame-cap{
+    position:absolute; left:0; right:0; bottom:0; padding:14px;
+    background:linear-gradient(to top, rgba(21,18,13,0.92), rgba(21,18,13,0));
+    opacity:0; transform:translateY(6px); transition:.3s ease;
+  }
+  .frame:hover .frame-cap{opacity:1; transform:translateY(0);}
+  .frame-cap p{margin:0; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase;}
+  .frame-cap span{color:var(--fog);}
+
+  /* ---------- ABOUT ---------- */
+  .about{display:grid; grid-template-columns:0.9fr 1.1fr; gap:clamp(30px,6vw,80px); align-items:center;}
+  @media (max-width:800px){ .about{grid-template-columns:1fr;} }
+  .about-photo{position:relative; aspect-ratio:4/5; overflow:hidden;}
+  .about-photo img{width:100%;height:100%;object-fit:cover; filter:grayscale(30%);}
+  .about-photo::before{
+    content:''; position:absolute; inset:12px; border:1px solid var(--safelight); pointer-events:none;
+  }
+  .about p{font-size:clamp(16px,1.8vw,19px); line-height:1.7; color:var(--bone); max-width:52ch;}
+  .about .eyebrow{margin-bottom:14px; display:block;}
+  .stat-row{display:flex; gap:clamp(28px,5vw,56px); margin-top:36px; flex-wrap:wrap;}
+  .stat b{font-family:'Anton',sans-serif; font-size:34px; display:block; color:var(--safelight);}
+  .stat span{font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--fog);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--ink-soft); border-top:1px solid var(--rule);
+  }
+  .contact .shell{display:grid; grid-template-columns:1.3fr 1fr; gap:40px;}
+  @media (max-width:760px){ .contact .shell{grid-template-columns:1fr;} }
+  .contact h2{font-size:clamp(36px,7vw,88px);}
+  .contact-link{
+    display:inline-flex; align-items:center; gap:14px;
+    font-family:'Anton',sans-serif; font-size:clamp(22px,3vw,32px); text-transform:none;
+    text-decoration:none; margin-top:22px; color:var(--bone); border-bottom:2px solid var(--safelight);
+    padding-bottom:6px;
+  }
+  .contact-link:hover{color:var(--safelight);}
+  .contact-meta{font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.08em; color:var(--fog); line-height:2;}
+  .contact-meta a{text-decoration:none; border-bottom:1px solid var(--rule);}
+
+  footer{
+    padding:22px clamp(20px,4vw,56px); border-top:1px solid var(--rule);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.06em; color:var(--fog2);
+  }
+
+  @media (max-width:700px){
+    nav{position:fixed; top:0; right:0; height:100vh; width:min(78vw,320px);
+      background:var(--ink-soft); transform:translateX(100%); transition:transform .35s ease;
+      padding:90px 28px; border-left:1px solid var(--rule); z-index:99;}
+    nav.open{transform:translateX(0);}
+    nav ul{flex-direction:column; gap:22px;}
+    .nav-toggle{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <a href="#top" class="logo">BRUNA <b>·</b> CHORINCAS</a>
+  <nav id="siteNav">
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://www.instagram.com/brunachorincas/" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">MENU</button>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-slide active" style="background-image:url('https://static.wixstatic.com/media/0a180e_a31413a9d02842b3a13d7aeb0e2968db~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_59ee0cd9e11a4f86a43efcee6a839064~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_6c871521917849b49d77380ed62dab30~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_e8816916c48448759ec53d9c7958983b~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_6bc3c4af9f29473fb84b8507ebefc97e~mv2.jpg')"></div>
+  <div class="hero-slide" style="background-image:url('https://static.wixstatic.com/media/0a180e_f11e88ed8a404917a6f7ade153402266~mv2.jpg')"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-title">Bruna Chorincas</h1>
+    <div class="hero-tagline">
+      <span>Styling</span><span>Content Creation</span><span>Fashion Photography &amp; Film</span><span>Creative Direction</span>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+  <div class="hero-dots" id="heroDots"></div>
+</div>
+
+<div class="clients">
+  <span class="eyebrow">Worked with</span>
+  <ul>
+    <li>Now You Live</li>
+    <li>Narah Soleigh</li>
+  </ul>
+</div>
+
+<section id="work">
+  <div class="shell">
+    <div class="section-head">
+      <h2>Selected<br>Work</h2>
+      <div class="filters" id="filters">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="styling">Styling &amp; Art Direction</button>
+        <button data-filter="video">Videography</button>
+        <button data-filter="content">Content Creation</button>
+      </div>
+    </div>
+
+    <div class="sprockets">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="grid" id="galleryGrid">
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 01</span>
+        <img src="https://static.wixstatic.com/media/0a180e_a31413a9d02842b3a13d7aeb0e2968db~mv2.jpg" alt="Chin Up — styling project" loading="lazy">
+        <div class="frame-cap"><p>Chin Up <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 02</span>
+        <img src="https://static.wixstatic.com/media/0a180e_59ee0cd9e11a4f86a43efcee6a839064~mv2.jpg" alt="Reverse — styling project" loading="lazy">
+        <div class="frame-cap"><p>Reverse <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="content">
+        <span class="frame-tag">No. 03</span>
+        <img src="https://static.wixstatic.com/media/0a180e_6c871521917849b49d77380ed62dab30~mv2.jpg" alt="Content creation reel" loading="lazy">
+        <div class="frame-cap"><p>Social Content <span>— Content Creation</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 04</span>
+        <img src="https://static.wixstatic.com/media/0a180e_e8816916c48448759ec53d9c7958983b~mv2.jpg" alt="Alexandra Oakley — styling project" loading="lazy">
+        <div class="frame-cap"><p>Alexandra Oakley <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="video">
+        <span class="frame-tag">No. 05</span>
+        <img src="https://static.wixstatic.com/media/0a180e_6bc3c4af9f29473fb84b8507ebefc97e~mv2.jpg" alt="Videography still" loading="lazy">
+        <div class="frame-cap"><p>Brand Film <span>— Videography</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 06</span>
+        <img src="https://static.wixstatic.com/media/0a180e_f11e88ed8a404917a6f7ade153402266~mv2.jpg" alt="Elle Curzon — styling project" loading="lazy">
+        <div class="frame-cap"><p>Elle Curzon <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="content">
+        <span class="frame-tag">No. 07</span>
+        <img src="https://static.wixstatic.com/media/0a180e_5e8937f34f704ea59584350e053b2cc5~mv2.jpg" alt="Content creation still" loading="lazy">
+        <div class="frame-cap"><p>Now You Live <span>— Content Creation</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="styling">
+        <span class="frame-tag">No. 08</span>
+        <img src="https://static.wixstatic.com/media/0a180e_87322a26a0f54f1db71c0c94d074c9ed~mv2.jpg" alt="Threads styling project" loading="lazy">
+        <div class="frame-cap"><p>Threads Styling <span>— Styling &amp; Art Direction</span></p></div>
+      </div>
+
+      <div class="frame show" data-cat="video">
+        <span class="frame-tag">No. 09</span>
+        <img src="https://static.wixstatic.com/media/0a180e_000dea68bf3941fbbd15de72d43742eb~mv2.jpg" alt="Narah Soleigh video still" loading="lazy">
+        <div class="frame-cap"><p>Narah Soleigh <span>— Videography</span></p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="shell about">
+    <div class="about-photo">
+      <img src="https://static.wixstatic.com/media/0a180e_6bc3c4af9f29473fb84b8507ebefc97e~mv2.jpg" alt="Bruna Chorincas portrait">
+    </div>
+    <div>
+      <span class="eyebrow">Who am I</span>
+      <h2 style="font-size:clamp(30px,5vw,52px); margin-bottom:18px;">Photographer &amp; videographer, based in Derby.</h2>
+      <p>I'm Bruna — a freelance photographer and videographer working with small, independent brands who want their social content to feel considered rather than churned out. I organise, style and shoot, from concept through to final edit, and I've spent the last few years learning exactly what makes a brand's feed feel like it belongs to them.</p>
+      <p>Previously a studio technician, I now work full-time on set and on location for fashion and lifestyle brands, including <strong>Now You Live</strong> and <strong>Narah Soleigh</strong>.</p>
+      <div class="stat-row">
+        <div class="stat"><b>02</b><span>Brand Partners</span></div>
+        <div class="stat"><b>Derby</b><span>Based, UK-wide</span></div>
+        <div class="stat"><b>Styling · Film</b><span>Core Services</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="shell">
+    <div>
+      <span class="eyebrow">Get in touch</span>
+      <h2>Let's<br>Shoot.</h2>
+      <a class="contact-link" href="mailto:bruna.chorincaspt@gmail.com">bruna.chorincaspt@gmail.com →</a>
+    </div>
+    <div class="contact-meta">
+      <p>DERBY, ENGLAND<br>AVAILABLE FOR UK-WIDE PROJECTS</p>
+      <p><a href="https://www.instagram.com/brunachorincas/" target="_blank" rel="noopener">INSTAGRAM — @BRUNACHORINCAS</a></p>
+      <p><a href="mailto:bruna.chorincaspt@gmail.com">EMAIL — BRUNA.CHORINCASPT@GMAIL.COM</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 BRUNA CHORINCAS</span>
+  <span>STYLING — CONTENT CREATION — FASHION PHOTOGRAPHY &amp; FILM</span>
+</footer>
+
+<script>
+  // header shrink on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+  navToggle.addEventListener('click', () => {
+    const open = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  siteNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    siteNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // hero carousel
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsWrap = document.getElementById('heroDots');
+  let current = 0;
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+  function goTo(i){
+    slides[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+  }
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion){
+    setInterval(() => goTo((current + 1) % slides.length), 5000);
+  }
+
+  // gallery filters
+  const filterButtons = document.querySelectorAll('.filters button');
+  const frames = document.querySelectorAll('.frame');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      frames.forEach(frame => {
+        const match = f === 'all' || frame.dataset.cat === f;
+        frame.classList.toggle('show', match);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
