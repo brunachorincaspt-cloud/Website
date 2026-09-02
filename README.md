@@ -9,7 +9,7 @@ small JavaScript file. Open `index.html` in a browser and it works.
 | --- | --- |
 | `index.html` | Home. Full-screen photo slideshow, no scrolling. |
 | `portfolio.html` | The work grid, plus the About and Contact sections. |
-| `chin-up.html` … `narah-soleigh.html` | One page per project (13 of them). |
+| `chin-up.html` … `narah-soleigh.html` | One page per project (16 of them). |
 | `404.html` | Shown when a URL doesn't exist. |
 
 ## Folders
@@ -54,9 +54,42 @@ project pages so the sequence stays unbroken.
 A category with nothing in it shows "Nothing here yet" rather than an empty page —
 Videography is in that state at the moment.
 
-**Projects, in the order they appear:** Chin Up, Kate Parks, Gabriel Custódio,
-Street Style: LFW, Now You Live, Still Life, Emma Hayward-H, CAMP, Reverse,
-Emerging Designers Promotion, John Smedley, Threads Styling, Narah Soleigh.
+**Projects, in the order they appear:** Chin Up, Kate Parks, Reverse, Gabriel
+Custódio, Street Style: LFW, Now You Live, Still Life, Emma Hayward-H, CAMP,
+Emerging Designers Promotion, John Smedley, Threads Styling, Matilda Holttum,
+Historical Palace Fashion Film, Short Film, Narah Soleigh.
+
+## Films
+
+Films are embedded from YouTube rather than stored here — video files are far
+too large for a repository, and YouTube handles the player, the quality
+switching and the phone playback for free. Views still count towards the
+channel.
+
+To add one, put this at the top of a project page, above the photo grid:
+
+```html
+<div class="project-video">
+  <div class="video-frame">
+    <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+            title="Project name" loading="lazy" allowfullscreen
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  </div>
+</div>
+```
+
+`VIDEO_ID` is the part after `v=` in a YouTube address. Add `vertical` to the
+first line (`class="project-video vertical"`) for a Short, which switches the
+frame from 16:9 to 9:16 and stops it being stretched across the page.
+
+The embeds use `youtube-nocookie.com`, which holds off on tracking the viewer
+until they actually press play.
+
+A project can be both stills and film: give its tile `data-cat="styling video"`
+and it appears under both filters. Reverse and John Smedley work this way.
+
+Tiles for film projects use YouTube's own still as the cover. Replacing that
+with your own photograph is just a matter of swapping the `src`.
 
 ## A note on the photographs
 
