@@ -64,6 +64,7 @@ function initHeroSlideshow(interval = 5000){
 function initFilters(){
   const buttons = document.querySelectorAll('.filters button');
   const frames = document.querySelectorAll('.grid .frame');
+  const empty = document.getElementById('emptyFilter');
   if (!buttons.length) return;
 
   buttons.forEach(btn => {
@@ -76,11 +77,16 @@ function initFilters(){
       btn.setAttribute('aria-pressed', 'true');
 
       const filter = btn.dataset.filter;
+      let shown = 0;
       frames.forEach(frame => {
         // A tile can belong to several categories: data-cat="styling content"
         const cats = (frame.dataset.cat || '').split(/\s+/);
-        frame.classList.toggle('show', filter === 'all' || cats.includes(filter));
+        const match = filter === 'all' || cats.includes(filter);
+        frame.classList.toggle('show', match);
+        if (match) shown++;
       });
+      // A category with nothing in it should say so, not look broken.
+      if (empty) empty.hidden = shown > 0;
     });
   });
 }

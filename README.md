@@ -9,7 +9,7 @@ small JavaScript file. Open `index.html` in a browser and it works.
 | --- | --- |
 | `index.html` | Home. Full-screen photo slideshow, no scrolling. |
 | `portfolio.html` | The work grid, plus the About and Contact sections. |
-| `chin-up.html` … `camp.html` | One page per project (8 of them). |
+| `chin-up.html` … `narah-soleigh.html` | One page per project (13 of them). |
 | `404.html` | Shown when a URL doesn't exist. |
 
 ## Folders
@@ -51,16 +51,24 @@ project pages so the sequence stays unbroken.
 
 **Filter categories** — a tile is filtered by its `data-cat`. Use `styling`,
 `video` or `content`. A tile can sit in more than one: `data-cat="styling content"`.
+A category with nothing in it shows "Nothing here yet" rather than an empty page —
+Videography is in that state at the moment.
+
+**Projects, in the order they appear:** Chin Up, Kate Parks, Gabriel Custódio,
+Street Style: LFW, Now You Live, Still Life, Emma Hayward-H, CAMP, Reverse,
+Emerging Designers Promotion, John Smedley, Threads Styling, Narah Soleigh.
 
 ## A note on the photographs
 
 The images in `images/` live in this repository — they load from here and will keep
 working no matter what.
 
-The rest are still hot-linked from the old Wix site (`static.wixstatic.com`): the
-home-page slideshow, the About portrait, and 51 of the 59 tiles in the portfolio
-grid. **If that Wix site is ever taken down or the account closes, those images
-disappear from this site.** Worth replacing them with local files at some point.
+44 photographs are still hot-linked from the old Wix site
+(`static.wixstatic.com`): the home-page slideshow, the About portrait, and the
+photographs inside Reverse, Emerging Designers, John Smedley, Threads Styling,
+and the four newest in Emma Hayward-H. **If that Wix site is ever taken down or
+the account closes, those images disappear from this site.** Replacing them with
+local files is the single most valuable bit of housekeeping left.
 
 ## Publishing with GitHub Pages
 
