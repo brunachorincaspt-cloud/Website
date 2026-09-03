@@ -104,6 +104,16 @@ The player sits under a `pointer-events:none` layer, which is what keeps the
 tile clickable — without it the iframe swallows the click and the project page
 never opens.
 
+It is also deliberately scaled to 150% of the tile's height and centred.
+YouTube draws its title across the top of the player and its controls across
+the bottom, and there is no parameter that reliably removes them; over-scaling
+pushes both outside the visible tile. Captions are switched off with
+`cc_load_policy=0` for viewers who have them on by default.
+
+Each film tile carries `data-start`, the number of seconds to begin at, so a
+tile opens part-way into the film instead of on a title card. Change the
+numbers in the grid markup to taste.
+
 Dropping a clip into `images/clips/` named after the project takes over from
 the YouTube player for that tile, which is lighter and looks more like the rest
 of the site. See `images/clips/README.md` for what to export.

@@ -148,10 +148,15 @@ function initFilters(){
 
     const frame = document.createElement('iframe');
     // loop needs playlist set to the same id; enablejsapi lets us pause later.
+    // start: begin part-way in, so tiles open on the film rather than on a
+    // title card. cc_load_policy=0 keeps subtitles off for viewers who have
+    // them switched on by default.
+    const start = tile.dataset.start || '0';
     frame.src = 'https://www.youtube-nocookie.com/embed/' + id +
       '?autoplay=1&mute=1&loop=1&playlist=' + id +
       '&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1' +
-      '&iv_load_policy=3&enablejsapi=1';
+      '&iv_load_policy=3&enablejsapi=1&cc_load_policy=0&fs=0' +
+      '&start=' + start;
     frame.title = tile.querySelector('.frame-cap')?.textContent || 'Film';
     frame.setAttribute('tabindex', '-1');      // keep it out of tab order
     frame.setAttribute('aria-hidden', 'true'); // the link already describes it

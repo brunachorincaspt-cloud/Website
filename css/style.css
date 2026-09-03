@@ -247,8 +247,13 @@ a.frame:hover .frame-cap, a.frame:focus-visible .frame-cap{opacity:1;}
 .yt-holder.playing{opacity:1;}
 .yt-holder iframe{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  height:100%; width:auto; aspect-ratio:16/9;
-  min-width:100%; min-height:100%;
+  /* Deliberately taller than the tile. YouTube draws its title along the top
+     and its controls along the bottom, so the player is over-scaled and
+     centred, pushing both outside what the tile shows. At 150% a quarter of
+     the height is cropped away at each end, which clears them at every tile
+     size the grid uses. */
+  height:150%; width:auto; aspect-ratio:16/9;
+  min-width:100%;
   border:0;
 }
 /* The still stays put underneath and fades once the film is running. */
