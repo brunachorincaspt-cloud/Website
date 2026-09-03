@@ -236,6 +236,24 @@ a.frame:hover .frame-cap, a.frame:focus-visible .frame-cap{opacity:1;}
   aspect-ratio:9/16; max-width:400px; margin:0 auto; background:#000;
 }
 
+/* A YouTube player filling a tile, sitting under the still.
+   pointer-events:none is what keeps the tile clickable: without it the
+   iframe swallows the click and the project page never opens. */
+.yt-holder{
+  position:absolute; inset:0; overflow:hidden;
+  pointer-events:none; opacity:0; transition:opacity .8s ease;
+  background:var(--paper-soft);
+}
+.yt-holder.playing{opacity:1;}
+.yt-holder iframe{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  height:100%; width:auto; aspect-ratio:16/9;
+  min-width:100%; min-height:100%;
+  border:0;
+}
+/* The still stays put underneath and fades once the film is running. */
+.frame.film-playing img{opacity:0; transition:opacity .8s ease;}
+
 /* Marks a tile that opens a film rather than stills. */
 .frame-play{
   position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);

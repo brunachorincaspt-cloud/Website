@@ -120,3 +120,68 @@ function initFilters(){
 
   clips.forEach(v => seen.observe(v));
 })();
+
+/* ---------- FILM TILES PLAYING ON THE GRID ---------- */
+/* Tiles carrying data-yt build a muted, looping YouTube player once they are
+   scrolled to. Nothing is requested for a tile nobody reaches, and players
+   pause when they leave the screen, so a phone is not running five at once. */
+(function initGridFilms(){
+  const tiles = document.querySelectorAll('.frame[data-yt]');
+  if (!tiles.length) return;
+
+  // Leave the stills alone for anyone who asked for less motion, or whose
+  // device has asked sites to go easy on data.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (navigator.connection && navigator.connection.saveData) return;
+
+  const command = (frame, func) => {
+    try {
+      frame.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: func, args: '' }), '*');
+    } catch (e) { /* player not ready yet; the observer will try again */ }
+  };
+
+  const build = (tile) => {
+    const id = tile.dataset.yt;
+    const holder = document.createElement('span');
+    holder.className = 'yt-holder';
+
+    const frame = document.createElement('iframe');
+    // loop needs playlist set to the same id; enablejsapi lets us pause later.
+    frame.src = 'https://www.youtube-nocookie.com/embed/' + id +
+      '?autoplay=1&mute=1&loop=1&playlist=' + id +
+      '&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1' +
+      '&iv_load_policy=3&enablejsapi=1';
+    frame.title = tile.querySelector('.frame-cap')?.textContent || 'Film';
+    frame.setAttribute('tabindex', '-1');      // keep it out of tab order
+    frame.setAttribute('aria-hidden', 'true'); // the link already describes it
+    frame.allow = 'autoplay; encrypted-media; picture-in-picture';
+
+    holder.appendChild(frame);
+    tile.appendChild(holder);
+    tile._yt = frame;
+
+    // Reveal once it has had a moment to start, so we never flash a black box.
+    setTimeout(() => {
+      holder.classList.add('playing');
+      tile.classList.add('film-playing');
+    }, 900);
+    return frame;
+  };
+
+  const seen = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const tile = entry.target;
+      if (entry.isIntersecting) {
+        if (!tile._yt) build(tile);
+        else command(tile._yt, 'playVideo');
+      } else if (tile._yt) {
+        command(tile._yt, 'pauseVideo');
+      }
+    });
+    // Only a small margin: a generous one builds players for rows still below
+    // the fold, which on a phone means several YouTube players at once.
+  }, { rootMargin: '50px' });
+
+  tiles.forEach(t => seen.observe(t));
+})();

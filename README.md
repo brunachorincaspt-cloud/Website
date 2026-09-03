@@ -95,9 +95,18 @@ and it appears under both filters. Reverse and John Smedley work this way.
 Tiles for film projects use YouTube's own still as the cover. Replacing that
 with your own photograph is just a matter of swapping the `src`.
 
-A film tile can also loop a short silent clip instead of showing a still — drop
-a file into `images/clips/` named after the project and it happens
-automatically. See `images/clips/README.md` for what to export.
+A film tile plays its YouTube video in place, muted and looping. The player is
+built only once the tile is scrolled to and pauses when it leaves the screen,
+so a phone never runs five at once. Anyone who has asked for reduced motion, or
+whose device has asked sites to save data, keeps the still instead.
+
+The player sits under a `pointer-events:none` layer, which is what keeps the
+tile clickable — without it the iframe swallows the click and the project page
+never opens.
+
+Dropping a clip into `images/clips/` named after the project takes over from
+the YouTube player for that tile, which is lighter and looks more like the rest
+of the site. See `images/clips/README.md` for what to export.
 
 ## A note on the photographs
 
