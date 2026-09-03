@@ -180,12 +180,13 @@ section{padding:clamp(60px,10vw,120px) var(--pad);}
 }
 .frame.show{display:block;}
 a.frame{cursor:pointer;}
-.frame img{
+.frame img, .frame video{
   width:100%; height:100%; object-fit:cover;
   filter:brightness(1) contrast(1.02);
   transition:filter .5s ease;
 }
-.frame:hover img, a.frame:focus-visible img{filter:brightness(0.82) contrast(1.02);}
+.frame:hover img, a.frame:focus-visible img,
+.frame:hover video, a.frame:focus-visible video{filter:brightness(0.82) contrast(1.02);}
 
 /* Project name revealed over a linked tile. */
 .frame-cap{

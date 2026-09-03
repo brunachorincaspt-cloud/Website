@@ -90,3 +90,33 @@ function initFilters(){
     });
   });
 }
+
+/* ---------- LOOPING CLIPS ON THE GRID ---------- */
+/* Silent previews play only while on screen, so a phone isn't decoding five
+   films at once or spending data on tiles nobody has scrolled to. */
+(function initGridClips(){
+  const clips = document.querySelectorAll('.frame video');
+  if (!clips.length) return;
+
+  // Someone who asked for less motion gets the still frame instead.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  if (!('IntersectionObserver' in window)) {
+    clips.forEach(v => v.play().catch(() => {}));   // older browsers: just play
+    return;
+  }
+
+  const seen = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const v = entry.target;
+      if (entry.isIntersecting) {
+        // A browser may still refuse; the poster frame stays, which is fine.
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
+    });
+  }, { rootMargin: '100px' });
+
+  clips.forEach(v => seen.observe(v));
+})();

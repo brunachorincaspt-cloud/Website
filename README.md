@@ -55,9 +55,13 @@ A category with nothing in it shows "Nothing here yet" rather than an empty page
 Videography is in that state at the moment.
 
 **Projects, in the order they appear:** Chin Up, Kate Parks, Reverse, Gabriel
-Custódio, Street Style: LFW, Now You Live, Still Life, Emma Hayward-H, CAMP,
-Emerging Designers Promotion, John Smedley, Threads Styling, Matilda Holttum,
-Historical Palace Fashion Film, Short Film, Narah Soleigh.
+Custódio, Street Style: LFW, John Smedley, Now You Live, Still Life, Matilda
+Holttum, Emma Hayward-H, CAMP, Historical Palace Fashion Film, Emerging
+Designers Promotion, Threads Styling, Short Film, Narah Soleigh.
+
+The five films sit at positions 3, 6, 9, 12 and 15 so they are spread through
+the grid rather than bunched at the end. The previous/next links on the project
+pages follow this same order, so clicking through matches the grid.
 
 ## Films
 
@@ -90,6 +94,10 @@ and it appears under both filters. Reverse and John Smedley work this way.
 
 Tiles for film projects use YouTube's own still as the cover. Replacing that
 with your own photograph is just a matter of swapping the `src`.
+
+A film tile can also loop a short silent clip instead of showing a still — drop
+a file into `images/clips/` named after the project and it happens
+automatically. See `images/clips/README.md` for what to export.
 
 ## A note on the photographs
 
