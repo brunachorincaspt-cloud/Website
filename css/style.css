@@ -267,10 +267,15 @@ a.frame:hover .frame-cap, a.frame:focus-visible .frame-cap{opacity:1;}
   display:flex; align-items:center; justify-content:center;
   color:var(--paper); font-size:15px; line-height:1; padding-left:3px;
   background:rgba(24,22,18,0.28);
-  transition:background .4s ease;
+  transition:background .4s ease, opacity .8s ease;
   pointer-events:none;
 }
 a.frame:hover .frame-play{background:rgba(24,22,18,0.5);}
+/* Once the film is actually running the marker has done its job — it only
+   exists to say "this is a film" while the still is showing. It stays put for
+   anyone whose tile never starts: reduced motion, save-data, or a phone that
+   refuses to autoplay. */
+.frame.film-playing .frame-play{opacity:0;}
 
 /* ---------- PROJECT PAGE ---------- */
 .title-block{
