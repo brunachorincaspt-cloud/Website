@@ -7,7 +7,7 @@ project's still on the portfolio grid automatically — no code change needed.
     images/clips/john-smedley.mp4
     images/clips/matilda-holttum.mp4
     images/clips/historical-palace.mp4
-    images/clips/short-film.mp4
+    images/clips/now-you-live.mp4
 
 `.mp4` is preferred; `.webm` also works. Delete a file and the tile goes back
 to its still.

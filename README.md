@@ -55,9 +55,9 @@ A category with nothing in it shows "Nothing here yet" rather than an empty page
 Videography is in that state at the moment.
 
 **Projects, in the order they appear:** Chin Up, Kate Parks, Reverse, Gabriel
-Custódio, Street Style: LFW, John Smedley, Now You Live, Still Life, Matilda
-Holttum, Emma Hayward-H, CAMP, Historical Palace Fashion Film, Emerging
-Designers Promotion, Threads Styling, Short Film, Narah Soleigh.
+Custódio, Street Style: LFW, John Smedley, Still Life, Emma Hayward-H, Now You
+Live, CAMP, Emerging Designers Promotion, Matilda Holttum, Threads Styling,
+Narah Soleigh, Historical Palace Fashion Film.
 
 The five films sit at positions 3, 6, 9, 12 and 15 so they are spread through
 the grid rather than bunched at the end. The previous/next links on the project
