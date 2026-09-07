@@ -75,12 +75,18 @@ To add one, put this at the top of a project page, above the photo grid:
 ```html
 <div class="project-video">
   <div class="video-frame">
-    <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+    <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID&playsinline=1&rel=0"
             title="Project name" loading="lazy" allowfullscreen
-            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>
   </div>
 </div>
 ```
+
+The film starts on its own when the page opens. It is necessarily muted:
+every browser blocks autoplay with sound, and there is no setting that
+changes that — the controls stay visible so a viewer can turn it up. The word
+`autoplay` must appear in `allow=` or the browser refuses even a muted start.
+It loops so the film never lands on YouTube's end screen of suggestions.
 
 `VIDEO_ID` is the part after `v=` in a YouTube address. Add `vertical` to the
 first line (`class="project-video vertical"`) for a Short, which switches the
