@@ -81,7 +81,11 @@ function initFilters(){
       frames.forEach(frame => {
         // A tile can belong to several categories: data-cat="styling content"
         const cats = (frame.dataset.cat || '').split(/\s+/);
-        const match = filter === 'all' || cats.includes(filter);
+        // A project with two tiles shows both under "All", but a filtered
+        // view lists it once rather than looking like a mistake.
+        const match = filter === 'all'
+          ? true
+          : (cats.includes(filter) && !frame.dataset.dup);
         frame.classList.toggle('show', match);
         if (match) shown++;
       });

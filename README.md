@@ -19,6 +19,7 @@ small JavaScript file. Open `index.html` in a browser and it works.
 | `css/style.css` | Every style for every page. Colours are at the top, in `:root`. |
 | `js/site.js` | Menu, header-on-scroll, slideshow, gallery filters. |
 | `images/` | The photographs, one folder per project. |
+| `cv/` | The CV offered for download from the About section. |
 | `drafts/` | Earlier versions, kept for reference. Nothing links to them. |
 
 ## Making changes
@@ -97,6 +98,10 @@ until they actually press play.
 
 A project can be both stills and film: give its tile `data-cat="styling video"`
 and it appears under both filters. Reverse and John Smedley work this way.
+
+Reverse and Narah Soleigh each have two tiles — the film that plays, and a
+still on the same cover. The second carries `data-dup="1"`, which keeps it out
+of the filtered views, so a filter lists each project once.
 
 Tiles for film projects use YouTube's own still as the cover. Replacing that
 with your own photograph is just a matter of swapping the `src`.
